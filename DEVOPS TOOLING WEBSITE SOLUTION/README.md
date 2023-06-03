@@ -11,7 +11,8 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 ## STEP 1 - PREPARE NFS SERVER
 - Spin up a new EC2 instance with RHEL Linux 8 Operating System.<br>
 - Configure LVM on the Server. <br>
-* List attached volumes`ls /dev/`* Install lvm2`sudo yum install lvm2`* Use gdisk utility to create single partitions of 10G in each disk. <br>
+* List attached volumes`ls /dev/`<br>
+* Install lvm2`sudo yum install lvm2`* Use gdisk utility to create single partitions of 10G in each disk. <br>
 ```
 `sudo gdisk /dev/xvdf`
 `sudo gdisk /dev/xvdg`
@@ -28,15 +29,16 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 * Create Logical Volume <br>
 `sudo lvcreate -n lv-apps -L 10G webdata-vg`
 `sudo lvcreate -n lv-logs -L 10G webdata-vg`
-`sudo lvcreate -n lv-opt -L 10G webdata-vg`
+`sudo lvcreate -n lv-opt -L 9G webdata-vg`
 
 * Verify setup<br>
 `sudo lsblk`<br>
 * Instead of formatting the disks as ext4, you will have to format them as xfs <br>
+```
 `sudo mkfs -t xfs /dev/webdata-vg/lv-apps`
 `sudo mkfs -t xfs /dev/webdata-vg/lv-logs`
 `sudo mkfs -t xfs /dev/webdata-vg/lv-opt`
-
+```
 - Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs.<br>
 `sudo lsblk`<br>
 - Create the root directories to be shared by our web servers (client) <br>
@@ -77,7 +79,8 @@ sudo chmod -R 777 /mnt/opt
 
 - Install NFS server, configure it to start on reboot and make sure it is u and running. <br>
 ```
-sudo yum -y updatesudo yum install nfs-utils -y 
+sudo yum -y update
+sudo yum install nfs-utils -y 
 sudo systemctl start nfs-server.service 
 sudo systemctl enable nfs-server.service
 sudo systemctl status nfs-server.service
@@ -134,9 +137,11 @@ During the next steps we will do following: <br>
 - Make sure that the changes will persist on Web Server after reboot: <br>
 `sudo vi /etc/fstab` 
 - Add following line <br>
+
 ```
 <NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
 ```
+
 - Install Remi’s repository, Apache and PHP <br>
 ```
 sudo yum install httpd -y 
