@@ -13,51 +13,51 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 - Configure LVM on the Server. <br>
 * List attached volumes`ls /dev/`* Install lvm2`sudo yum install lvm2`* Use gdisk utility to create single partitions of 10G in each disk. <br>
 ```
-`sudo gdisk /dev/xvdf`<br>
-`sudo gdisk /dev/xvdg`<br>
-`sudo gdisk /dev/xvdh`<br>
+`sudo gdisk /dev/xvdf`
+`sudo gdisk /dev/xvdg`
+`sudo gdisk /dev/xvdh`
 ```
 * Create physical volumes<br>
-`sudo pvcreate /dev/xvdf1`<br>
-`sudo pvcreate /dev/xvdg1`<br>
-`sudo pvcreate /dev/xvdh1`<br>
+`sudo pvcreate /dev/xvdf1`
+`sudo pvcreate /dev/xvdg1`
+`sudo pvcreate /dev/xvdh1`
 
 * Create Volume group VG <br>
-`sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1`<br> 
+`sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1` 
 
 * Create Logical Volume <br>
-`sudo lvcreate -n lv-apps -L 10G webdata-vg`<br>
-`sudo lvcreate -n lv-logs -L 10G webdata-vg`<br>
-`sudo lvcreate -n lv-opt -L 10G webdata-vg`<br>
+`sudo lvcreate -n lv-apps -L 10G webdata-vg`
+`sudo lvcreate -n lv-logs -L 10G webdata-vg`
+`sudo lvcreate -n lv-opt -L 10G webdata-vg`
 
 * Verify setup<br>
 `sudo lsblk`<br>
 * Instead of formatting the disks as ext4, you will have to format them as xfs <br>
-`sudo mkfs -t xfs /dev/webdata-vg/lv-apps`<br>
-`sudo mkfs -t xfs /dev/webdata-vg/lv-logs`<br>
-`sudo mkfs -t xfs /dev/webdata-vg/lv-opt`<br>
+`sudo mkfs -t xfs /dev/webdata-vg/lv-apps`
+`sudo mkfs -t xfs /dev/webdata-vg/lv-logs`
+`sudo mkfs -t xfs /dev/webdata-vg/lv-opt`
 
 - Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs.<br>
 `sudo lsblk`<br>
 - Create the root directories to be shared by our web servers (client) <br>
 ```
-sudo mkdir -p /mnt/apps <br>
-sudo mkdir -p /mnt/logs<br>
-sudo mkdir -p /mnt/opt <br>
+sudo mkdir -p /mnt/apps 
+sudo mkdir -p /mnt/logs
+sudo mkdir -p /mnt/opt 
 ```
 We set up permission that will allow our Web servers access the folder to read, write and execute files on NFS:<br>
 #No-one is Owner<br>
 ```
-sudo chown -R nobody: /mnt/apps <br>
-sudo chown -R nobody: /mnt/logs <br>
-sudo chown -R nobody: /mnt/opt <br> 
+sudo chown -R nobody: /mnt/apps 
+sudo chown -R nobody: /mnt/logs 
+sudo chown -R nobody: /mnt/opt  
 ```
 
 #Everyone can modify files <br>
 ```
-sudo chmod -R 777 /mnt/apps <br>
-sudo chmod -R 777 /mnt/logs <br>
-sudo chmod -R 777 /mnt/opt  <br>
+sudo chmod -R 777 /mnt/apps 
+sudo chmod -R 777 /mnt/logs 
+sudo chmod -R 777 /mnt/opt  
 ```
 
 **_Mount the shared directories to the logical volumes for persistent data_** <br>
@@ -77,10 +77,10 @@ sudo chmod -R 777 /mnt/opt  <br>
 
 - Install NFS server, configure it to start on reboot and make sure it is u and running. <br>
 ```
-sudo yum -y updatesudo yum install nfs-utils -y <br>
-sudo systemctl start nfs-server.service <br>
-sudo systemctl enable nfs-server.service <br>
-sudo systemctl status nfs-server.service <br>
+sudo yum -y updatesudo yum install nfs-utils -y 
+sudo systemctl start nfs-server.service 
+sudo systemctl enable nfs-server.service
+sudo systemctl status nfs-server.service
 ```
 - Restart NFS server
 ```
@@ -91,9 +91,9 @@ The file is typically located at /etc/exports. <br>
 `sudo vi /etc/exports` <br>
 - Edit the /etc/exports file in a text editor, and add one of the following  directives.
 ```
-/mnt/apps <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash) <br>
-/mnt/logs <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash) <br>
-/mnt/opt <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash) <br>
+/mnt/apps <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash) 
+/mnt/logs <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash) 
+/mnt/opt <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash) 
 ```
 All the directives below use the options rw, which enables both read and write, sync, which writes changes to disk before allowing users to access the modified file, and no_subtree_check, which means NFS doesn’t check if each subdirectory is accessible to the user.<br>
 Make the shared directory available to clients using the exportfs command.<br>
@@ -139,14 +139,14 @@ During the next steps we will do following: <br>
 ```
 - Install Remi’s repository, Apache and PHP <br>
 ```
-sudo yum install httpd -y <br>
-sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm <br>
-sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm <br>
-sudo dnf module reset php sudo dnf module enable php:remi-7.4 <br>
-sudo dnf install php php-opcache php-gd php-curl php-mysqlnd <br>
-sudo systemctl start php-fpm <br>
-sudo systemctl enable php-fpm <br>
-sudo setsebool -P httpd_execmem 1 <br>
+sudo yum install httpd -y 
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm 
+sudo dnf module reset php sudo dnf module enable php:remi-7.4 
+sudo dnf install php php-opcache php-gd php-curl php-mysqlnd 
+sudo systemctl start php-fpm 
+sudo systemctl enable php-fpm
+sudo setsebool -P httpd_execmem 1 
 ```
 **Repeat  Steps 1-5 for the other 2 Servers** <br>
 
