@@ -15,22 +15,24 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 * Install lvm2`sudo yum install lvm2` <br>*
 * Use gdisk utility to create single partitions of 10G in each disk. <br>
 ```
-`sudo gdisk /dev/xvdf`
-`sudo gdisk /dev/xvdg`
-`sudo gdisk /dev/xvdh`
+sudo gdisk /dev/xvdf
+sudo gdisk /dev/xvdg
+sudo gdisk /dev/xvdh
 ```
 * Create physical volumes<br>
-`sudo pvcreate /dev/xvdf1`
-`sudo pvcreate /dev/xvdg1`
-`sudo pvcreate /dev/xvdh1`
+`sudo pvcreate /dev/xvdf1` <br>
+`sudo pvcreate /dev/xvdg1` <br>
+`sudo pvcreate /dev/xvdh1` <br>
 
 * Create Volume group VG <br>
 `sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1` 
 
 * Create Logical Volume <br>
-`sudo lvcreate -n lv-apps -L 10G webdata-vg`
-`sudo lvcreate -n lv-logs -L 10G webdata-vg`
-`sudo lvcreate -n lv-opt -L 9G webdata-vg`
+```
+sudo lvcreate -n lv-apps -L 10G webdata-vg
+sudo lvcreate -n lv-logs -L 10G webdata-vg
+sudo lvcreate -n lv-opt -L 9G webdata-vg
+```
 
 * Verify setup<br>
 `sudo lsblk`<br>
@@ -149,9 +151,11 @@ During the next steps we will do following: <br>
 `sudo vi /etc/fstab` 
 - Add following line <br>
 
-```
-<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
-```
+
+
+`<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0`
+
+
 
 - Install Remi’s repository, Apache and PHP <br>
 ```
