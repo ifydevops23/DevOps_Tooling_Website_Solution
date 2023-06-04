@@ -12,7 +12,7 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 - Spin up a new EC2 instance with RHEL Linux 8 Operating System.<br>
 - Configure LVM on the Server. <br>
 * List attached volumes`ls /dev/`<br>
-* Install lvm2`sudo yum install lvm2` <br>*
+* Install lvm2`sudo yum install lvm2` <br>
 * Use gdisk utility to create single partitions of 10G in each disk. <br>
 ```
 sudo gdisk /dev/xvdf
