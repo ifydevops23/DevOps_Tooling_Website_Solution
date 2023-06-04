@@ -153,7 +153,9 @@ During the next steps we will do following: <br>
 
 
 
-`<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0`
+```
+<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+```
 
 
 
@@ -181,8 +183,10 @@ If you see the same files – it means NFS is mounted correctly. You can try to 
 - Verify that NFS was mounted successfully by running `df -h` <br>
 - Make sure that the changes will persist on Web Server after reboot:<br>
 `sudo vi /etc/fstab`<br>
-- Add following line
-```<NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
+- Add following line <br>
+  
+```
+<NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
 ```
 - Fork the tooling source code from Darey.io Github Account to your Github account. (Learn how to fork a repo here)<br>
 - Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html <br>
