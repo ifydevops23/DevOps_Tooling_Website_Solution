@@ -121,7 +121,15 @@ STEP 2 - PREPARE THE DATABASE <br>
 - Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr.<br>
 `GRANT ALL ON tooling.* TO 'webaccess'@'<SUBNET-CIDR>';` <br>
 - Flush Priveleges<br>
-`FLUSH PRIVELEGES;` <br>
+`FLUSH PRIVILEGES;` <br>
+
+**_Edit the mysql config file_**
+`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`
+Comment out #bind-address or use bind-address=<Subnet CIDR>
+
+**Restart mysql-server**<br>
+`sudo systemctl stop mysql`
+`sudo systemctl restart mysql`
 
 ## STEP 3 - PREPARE THE WEBSERVERS <br>
 We need to make sure that our Web Servers can serve the same content from shared storage solutions, in our case – NFS Server and MySQL database.You already know that one DB can be accessed for reads and writes by multiple clients.<br>
@@ -152,8 +160,8 @@ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noa
 sudo dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm 
 sudo dnf module reset php
 sudo dnf module enable php:remi-7.4 
-sudo dnf install php php-opcache php-gd php-curl php-mysqlnd 
-sudo systemctl start php-fpm 
+sudo dnf install php php-opcache php-gd php-curl php-mysqlnd --nobest
+sudo systemctl start php-fpm 
 sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1 
 ```
