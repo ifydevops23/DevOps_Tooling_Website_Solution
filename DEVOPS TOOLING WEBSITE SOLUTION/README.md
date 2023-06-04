@@ -12,7 +12,8 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 - Spin up a new EC2 instance with RHEL Linux 8 Operating System.<br>
 - Configure LVM on the Server. <br>
 * List attached volumes`ls /dev/`<br>
-* Install lvm2`sudo yum install lvm2`* Use gdisk utility to create single partitions of 10G in each disk. <br>
+* Install lvm2`sudo yum install lvm2` <br>*
+* Use gdisk utility to create single partitions of 10G in each disk. <br>
 ```
 `sudo gdisk /dev/xvdf`
 `sudo gdisk /dev/xvdg`
@@ -111,7 +112,7 @@ Check which port is used by NFS and open it using Security Groups (add new Inbou
 
 STEP 2 - PREPARE THE DATABASE <br>
 - Install MySQL server. <br>
-`sudo yum install mysql-server` <br>
+`sudo apt install mysql-server` <br>
 `sudo mysql`<br>
 - Create a database and name it tooling <br>
 `CREATE DATABASE tooling;`<br>
@@ -119,6 +120,8 @@ STEP 2 - PREPARE THE DATABASE <br>
 `CREATE USER 'webaccess'@'<SUBNET-CIDR>'IDENTIFIED BY 'password';` <br>
 - Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr.<br>
 `GRANT ALL ON tooling.* TO 'webaccess'@'<SUBNET-CIDR>';` <br>
+- Flush Priveleges<br>
+`FLUSH PRIVELEGES;` <br>
 
 ## STEP 3 - PREPARE THE WEBSERVERS <br>
 We need to make sure that our Web Servers can serve the same content from shared storage solutions, in our case – NFS Server and MySQL database.You already know that one DB can be accessed for reads and writes by multiple clients.<br>
@@ -145,9 +148,10 @@ During the next steps we will do following: <br>
 - Install Remi’s repository, Apache and PHP <br>
 ```
 sudo yum install httpd -y 
-sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
-sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm 
-sudo dnf module reset php sudo dnf module enable php:remi-7.4 
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm 
+sudo dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm 
+sudo dnf module reset php
+sudo dnf module enable php:remi-7.4 
 sudo dnf install php php-opcache php-gd php-curl php-mysqlnd 
 sudo systemctl start php-fpm 
 sudo systemctl enable php-fpm
@@ -173,8 +177,8 @@ If you see the same files – it means NFS is mounted correctly. You can try to 
 - Download  DevOpsToolingWebsite and copy the html folder to var/www/html <br>
 
 ```
-mkdir DevOpsToolingWebsite 
-cd   DevOpsToolingWebsite
+mkdir Tooling 
+cd   Tooling
 sudo wget http://wordpress.org/latest.tar.gz
 sudo tar xzvf latest.tar.gz  sudo rm -rf latest.tar.gz   
 sudo cp -R html/.  /var/www/html/ 
