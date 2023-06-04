@@ -36,9 +36,9 @@ Network File Sharing (NFS) is a protocol that allows you to share directories an
 `sudo lsblk`<br>
 * Instead of formatting the disks as ext4, you will have to format them as xfs <br>
 ```
-`sudo mkfs -t xfs /dev/webdata-vg/lv-apps`
-`sudo mkfs -t xfs /dev/webdata-vg/lv-logs`
-`sudo mkfs -t xfs /dev/webdata-vg/lv-opt`
+sudo mkfs -t xfs /dev/webdata-vg/lv-apps
+sudo mkfs -t xfs /dev/webdata-vg/lv-logs
+sudo mkfs -t xfs /dev/webdata-vg/lv-opt
 ```
 - Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs.<br>
 `sudo lsblk`<br>
@@ -71,7 +71,7 @@ sudo chmod -R 777 /mnt/opt
 `sudo mount /dev/webdata-vg/lv-apps /mnt/apps` <br>
 
 
-*Mount lv-logs on /mnt/logs – To be used by webserver logs <br>
+* Mount lv-logs on /mnt/logs – To be used by webserver logs <br>
 `sudo mount /dev/webdata-vg/lv-logs /mnt/logs` <br>
 
 
@@ -123,13 +123,13 @@ STEP 2 - PREPARE THE DATABASE <br>
 - Flush Priveleges<br>
 `FLUSH PRIVILEGES;` <br>
 
-**_Edit the mysql config file_**
-`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`
-Comment out #bind-address or use bind-address=<Subnet CIDR>
+**_Edit the mysql config file_**<br>
+`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`<br>
+Comment out #bind-address or use bind-address=<Subnet CIDR> <br>
 
 **Restart mysql-server**<br>
-`sudo systemctl stop mysql`
-`sudo systemctl restart mysql`
+`sudo systemctl stop mysql` <br>
+`sudo systemctl restart mysql`<br>
 
 ## STEP 3 - PREPARE THE WEBSERVERS <br>
 We need to make sure that our Web Servers can serve the same content from shared storage solutions, in our case – NFS Server and MySQL database.You already know that one DB can be accessed for reads and writes by multiple clients.<br>
@@ -187,8 +187,9 @@ If you see the same files – it means NFS is mounted correctly. You can try to 
 ```
 mkdir Tooling 
 cd   Tooling
-sudo wget http://wordpress.org/latest.tar.gz
-sudo tar xzvf latest.tar.gz  sudo rm -rf latest.tar.gz   
+sudo wget https://github.com/ifydevops23/tooling/archive/master.zip
+sudo unzip <tooling.zip> 
+sudo rm -rf <latest.tar.gz>   
 sudo cp -R html/.  /var/www/html/ 
 ```
 - Disable SELinux <br>
