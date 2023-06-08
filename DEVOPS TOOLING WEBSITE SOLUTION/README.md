@@ -130,6 +130,8 @@ STEP 2 - PREPARE THE DATABASE <br>
 Comment out #bind-address or use bind-address=<Subnet CIDR> <br>
 
 **Restart mysql-server**<br>
+`sudo systemctl start mysql` <br>
+`sudo systemctl enable mysql` <br>
 `sudo systemctl stop mysql` <br>
 `sudo systemctl restart mysql`<br>
 
@@ -208,7 +210,7 @@ sudo cp -R html/.  /var/www/html/ 
 - Update the website’s configuration to connect to the database (in /var/www/html/functions.php file) <br>
 - Apply tooling-db.sql script to your database using this command <br>
 ```
-mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
+mysql -h <databse-private-ip> -u <db-username> -p <database-name> < tooling-db.sql
 ```
 - Create in MySQL a new admin user with username: myuser and password: password:<br>
 ```INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES-> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);```
