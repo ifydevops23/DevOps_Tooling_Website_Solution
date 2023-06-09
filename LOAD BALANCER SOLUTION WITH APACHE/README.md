@@ -26,12 +26,12 @@ sudo apt install apache2 -y <br>
 sudo apt-get install libxml2-dev <br>
 #Enable the following modules: <br>
 ```
-sudo a2enmod rewrite <br>
-sudo a2enmod proxy <br>
-sudo a2enmod proxy_balancer <br>
-sudo a2enmod proxy_http <br>
-sudo a2enmod headers <br>
-sudo a2enmod lbmethod_bytraffic <br>
+sudo a2enmod rewrite 
+sudo a2enmod proxy 
+sudo a2enmod proxy_balancer 
+sudo a2enmod proxy_http 
+sudo a2enmod headers 
+sudo a2enmod lbmethod_bytraffic 
 ```
 #Restart apache2 service <br>
 `sudo systemctl restart apache2`
@@ -75,11 +75,13 @@ So let us configure the IP address to domain name mapping for our LB.#Open this 
 `sudo vi /etc/hosts`<br>
 #Add 2 records into this file with the Local IP address and arbitrary name for both of your Web Servers
 ```
-<WebServer1-Private-IP-Address> Web1<WebServer2-Private-IP-Address> Web2
+<WebServer1-Private-IP-Address> Web1
+<WebServer2-Private-IP-Address> Web2
 ```
 Now you can update your LB config file with those names instead of IP addresses.
 ```
-BalancerMember http://Web1:80 loadfactor=5 timeout=1BalancerMember http://Web2:80 loadfactor=5 timeout=1
+BalancerMember http://Web1:80 loadfactor=5 timeout=1
+BalancerMember http://Web2:80 loadfactor=5 timeout=1
 ```
 You can try to curl your Web Servers from LB locally<br> 
 `curl http://Web1` or `curl http://Web2`<br>
