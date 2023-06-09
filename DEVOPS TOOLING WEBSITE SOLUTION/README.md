@@ -185,7 +185,8 @@ During the next steps we will do following: <br>
 - `sudo yum install nfs-utils nfs4-acl-tools -y` <br>
 ![3_wb_install_nfs_client](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/1b2fdabd-7f41-4d82-b009-74b6ca57bf60)
 - Mount /var/www/ and target the NFS server’s export (directory) for apps <br>
-`sudo mkdir /var/wwwsudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www` <br>
+`sudo mkdir /var/www`<br>
+`sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www` <br>
 - Verify that NFS was mounted successfully by running `df -h`<br>
 - Make sure that the changes will persist on Web Server after reboot: <br>
 `sudo vi /etc/fstab` 
