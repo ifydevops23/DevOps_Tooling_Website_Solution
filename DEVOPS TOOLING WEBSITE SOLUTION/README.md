@@ -247,6 +247,8 @@ sudo cp -R html/.  /var/www/html/ 
 - To make this change permanent – open following config file <br>
 `sudo vi /etc/sysconfig/selinux` and set `SELINUX=disabled` <br>
 
+ ![3_selinux_disabled](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/34198067-d7fd-4fcd-8527-1e07af20b403)
+ 
 - Restart httpd`sudo systemctl restart httpd` <br>
 - Update the website’s configuration to connect to the database (in /var/www/html/functions.php file) <br>
 - Apply tooling-db.sql script to your database using this command <br>
