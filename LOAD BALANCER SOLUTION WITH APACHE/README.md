@@ -1,5 +1,7 @@
 # LOAD BALANCER SOLUTION WITH APACHE <br>
 
+![3_architecture_1](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/3c7250a2-d343-4edf-b38a-3f24d4c51e5d)
+
 When we access a website in the Internet we use an URL and we do not really know how many servers are out there serving our requests, this complexity is hidden from a regular user, but in the case of websites that are being visited by millions of users per day (like Google or Reddit), it is impossible to serve all the users from a single Web Server (it is also applicable to databases, but for now we will not focus on distributed DBs).<br>
 Each URL contains a domain name part, which is translated (resolved) to the IP address of a target server that will serve requests when open a website in the Internet. Translation (resolution) of domain names is performed by DNS servers, the most commonly used one has a public IP address 8.8.8.8 and belongs to Google. You can try to query it with nslookup command:<br>
 `nslookup 8.8.8.8`<br>
@@ -10,12 +12,9 @@ In our set-up in Project-7, we had 3 Web Servers and each of them had its own pu
 A client has to access them by using different URLs, which is not a nice user experience to remember the addresses/names of even 3 servers, let alone millions of Google servers. <br>
 In order to hide all this complexity and to have a single point of access with a single public IP address/name, a Load Balancer can be used. <br>
 
-![3_architecture_1](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/8cc52131-3b1b-4836-bb88-bb46d9f57397)
-
 A Load Balancer (LB) distributes clients’ requests among underlying Web Servers and makes sure that the load is distributed in an optimal way.<br>
 
 In this project, we will enhance our Tooling Website solution by adding a Load Balancer to distribute traffic between Web Servers and allow users to access our website using a single URL. <br>
-![3_architecture_1](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/3c7250a2-d343-4edf-b38a-3f24d4c51e5d)
 
 ## STEP 0 - REQUIREMENTS
 1. Two RHEL8 Web Servers
