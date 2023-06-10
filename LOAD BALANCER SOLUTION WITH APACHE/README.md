@@ -35,10 +35,11 @@ In this project, we will enhance our Tooling Website solution by adding a Load B
 
 2. Open TCP port 80 on Project-8-apache-lb by creating an Inbound Rule in the Security Group.
 3. Install Apache Load Balancer on Project-8-apache-lb server and configure it to point traffic coming to LB to both Web Servers:<br>
-#Install apache2 <br>sudo apt update <br>
-sudo apt install apache2 -y <br>
+#Install apache2 <br>
+`sudo apt update` <br>
+`sudo apt install apache2 -y` <br>
 ![3_install_apache](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/e744df2b-5fb8-48db-85a7-b10c0d149516)
-sudo apt-get install libxml2-dev <br>
+`sudo apt-get install libxml2-dev` <br>
 ![3_install_libxml](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/c367c8bc-2139-401c-bde6-69189625f896)
 
 #Enable the following modules: <br>
@@ -50,7 +51,7 @@ sudo a2enmod proxy_http
 sudo a2enmod headers 
 sudo a2enmod lbmethod_bytraffic 
 ```
-![3_enable_proxy](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/bf9fd5c8-8c73-425e-a37f-7bfd2105be16)
+![3_enable_proxy](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/bf9fd5c8-8c73-425e-a37f-7bfd2105be16)<br>
 
 #Restart apache2 service <br>
 `sudo systemctl restart apache2`
@@ -84,7 +85,11 @@ We can control in which proportion the traffic must be distributed by loadfactor
 
 4. Verify that our configuration works – try to access your LB’s public IP address or Public DNS name from your browser:<br>
 `http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php` <br>
-![3_login_page_from loadbalancer](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/d9ef1855-7976-444e-a597-03ae809ce258)
+![3_login_page_from loadbalancer](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/d9ef1855-7976-444e-a597-03ae809ce258)<br>
+
+Login as 'admin' user <br>
+
+![3_hello_from_propitix_after_Login](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/4346d4fb-49a9-4143-adec-e46ec472163e)
 
 Note: If in Project-7 you mounted /var/log/httpd/ from your Web Servers to the NFS server – unmount them and make sure that each Web Server has its own log directory.<br>
 `sudo umount -f /var/log/httpd`
@@ -93,7 +98,6 @@ Open two ssh/Putty consoles for both Web Servers and run the following command:<
 `sudo tail -f /var/log/httpd/access_log`<br>
 
 ![3_log_from_webserver_2](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/6f706860-1c2a-4d4d-8455-a6e20637e627)
-
 
 Try to refresh your browser page <br>
 `http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php` several times and ensure both servers receive HTTP GET requests from your LB – new records must appear in each server’s log file. <br>
@@ -129,6 +133,6 @@ You can try to curl your Web Servers from LB locally<br> 
 
 Remember, this is only an internal configuration and it is also local to your LB server, these names will neither be ‘resolvable’ from **other servers** internally nor from the Internet.<br>
 
-![3_implemented_architecture](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/5ec1c3cf-2f05-4708-b036-2012f5121f76)
+![desired_architecture](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/58b51d85-88ae-4070-bc61-fbac0c24509c)
 
 Congratulations!!!
