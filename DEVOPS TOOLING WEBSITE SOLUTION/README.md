@@ -252,22 +252,25 @@ sudo cp -R html/.  /var/www/html/ 
  
 - Restart httpd`sudo systemctl restart httpd` <br>
 - Update the website’s configuration to connect to the database (in /var/www/html/functions.php file) <br>
+`sudo vi /var/www/html/functions.php`<br>
+  
+![3_devops_website_config_from_webserver](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/5a05524d-6eb7-4174-a6e8-917917ef2b0c)
+
 - Apply tooling-db.sql script to your database using this command <br>
 ```
 mysql -h <databse-private-ip> -u <db-username> -p <database-name> < tooling-db.sql
 ```
 - Create in MySQL a new admin user with username: myuser and password: password:<br>
-```INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES-> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);```
-
+```
+INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES-> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+```
 ![3_create_myuser](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/c083d0a9-3299-40bc-93fc-18e145fdaa7b)
 
-- Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with "myuser" user. <br>
-
-![3_login_prpitix](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/54f7d474-f6e9-488f-bb7a-070dfec63666)
+- Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with "admin" user. <br>
+![4_devops_login](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/e2494e1d-5b51-46ae-9439-1e9a8b5451ab)
 
 Use Credentials for myuser to login<br>
-![3_after_login](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/035c0d2f-1fed-4511-b8fd-bd813dd62876)
 
-
+![4_after_succesful_login](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/6d53f583-e697-4fd2-88e5-17efa7a7abbc)
 
 Congratulations!!!
