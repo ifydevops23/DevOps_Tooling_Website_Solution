@@ -39,6 +39,7 @@ In this project, we will enhance our Tooling Website solution by adding a Load B
 `sudo apt update` <br>
 `sudo apt install apache2 -y` <br>
 ![3_install_apache](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/e744df2b-5fb8-48db-85a7-b10c0d149516)
+
 `sudo apt-get install libxml2-dev` <br>
 ![3_install_libxml](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/c367c8bc-2139-401c-bde6-69189625f896)
 
