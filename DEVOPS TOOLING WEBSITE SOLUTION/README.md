@@ -129,6 +129,9 @@ The file is typically located at /etc/exports. <br>
 All the directives below use the options rw, which enables both read and write, sync, which writes changes to disk before allowing users to access the modified file, and no_subtree_check, which means NFS doesn’t check if each subdirectory is accessible to the user.<br>
 Make the shared directory available to clients using the exportfs command.<br>
 `sudo exportfs -arv`<br>
+
+![1_check_exports](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/5e4ac58b-8ea5-4478-845f-9af5b0853cd1)
+
 After running this command, the NFS Kernel should be restarted. <br>
 ```
 sudo systemctl restart nfs-server.service
@@ -177,10 +180,10 @@ We need to make sure that our Web Servers can serve the same content from shared
 For storing shared files that our Web Servers will use – we will utilize NFS and mount previously created Logical Volume "lv-apps" to the folder where Apache stores files to be served to the users (/var/www).<br>
 This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of the data (in the database and on NFS) will be preserved.<br>
 During the next steps we will do following: <br>
-- Configure NFS client (this step must be done on all three servers) <br>
-- Deploy a Tooling application to our Web Servers into a shared NFS folder <br>
-- Configure the Web Servers to work with a single MySQL database <br>
-- Launch a new EC2 instance with RHEL 8 Operating System <br>
+1. Configure NFS client (this step must be done on all three servers) <br>
+2. Deploy a Tooling application to our Web Servers into a shared NFS folder <br>
+3. Configure the Web Servers to work with a single MySQL database <br>
+4. Launch a new EC2 instance with RHEL 8 Operating System <br>
 - Install NFS client <br>
 - `sudo yum install nfs-utils nfs4-acl-tools -y` <br>
 ![3_wb_install_nfs_client](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/1b2fdabd-7f41-4d82-b009-74b6ca57bf60)
@@ -188,14 +191,16 @@ During the next steps we will do following: <br>
 `sudo mkdir /var/www`<br>
 `sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www` <br>
 - Verify that NFS was mounted successfully by running `df -h`<br>
-- Make sure that the changes will persist on Web Server after reboot: <br>
+
+![3_check_mount_varwww](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/0b663b26-05c3-41cd-913e-024721cfe1c2)
+
+5. Make sure that the changes will persist on Web Server after reboot: <br>
 `sudo vi /etc/fstab` 
 - Add following line <br>
 
 ```
 <NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
 ```
-
 
 - Install Remi’s repository, Apache and PHP <br>
 ```
