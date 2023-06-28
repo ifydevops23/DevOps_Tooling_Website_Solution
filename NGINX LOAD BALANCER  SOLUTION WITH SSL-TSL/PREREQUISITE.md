@@ -31,10 +31,11 @@ cd   Tooling
 sudo wget https://github.com/ifydevops23/ToolingWebsite/archive/master.zip
 sudo unzip master.zip 
 sudo rm -rf master.zip   
-sudo cp -R html/.  /var/www/html/ 
-Disable SELinux 
-sudo setenforce 0
+sudo cp -R html/.  /var/www/html/
 ```
+Disable SELinux <br>
+`sudo setenforce 0`<br>
+
 To make this change permanent – open following config file<br>
 `sudo vi /etc/sysconfig/selinux and set SELINUX=disabled` <br>
 
