@@ -37,8 +37,11 @@ Disable SELinux <br>
 `sudo setenforce 0`<br>
 
 To make this change permanent – open following config file<br>
-`sudo vi /etc/sysconfig/selinux and set SELINUX=disabled` <br>
+`sudo vi /etc/sysconfig/selinux <br>
+and set SELINUX=disabled` <br>
 
+Resttart apache<b>
+`sudo systemctl restart httpd`<br>
 
 Restart httpdsudo systemctl restart httpd<br>
 Update the website’s configuration to connect to the database (in /var/www/html/functions.php file)<br>
