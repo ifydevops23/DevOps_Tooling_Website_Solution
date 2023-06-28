@@ -12,8 +12,9 @@
 Install Remi’s repository, Apache and PHP
 ```
 sudo yum install httpd -y 
-sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm 
-sudo dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm 
+sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm  
+sudo dnf module list php 
 sudo dnf module reset php
 sudo dnf module enable php:remi-7.4 
 sudo dnf install php php-opcache php-gd php-curl php-mysqlnd --nobest
@@ -27,7 +28,7 @@ Download  DevOpsToolingWebsite and copy the html folder to var/www/html <br>
 ```
 mkdir Tooling 
 cd   Tooling
-sudo wget https://github.com/ifydevops23/tooling/archive/master.zip
+sudo wget https://github.com/ifydevops23/ToolingWebsite/archive/master.zip
 sudo unzip master.zip 
 sudo rm -rf master.zip   
 sudo cp -R html/.  /var/www/html/ 
