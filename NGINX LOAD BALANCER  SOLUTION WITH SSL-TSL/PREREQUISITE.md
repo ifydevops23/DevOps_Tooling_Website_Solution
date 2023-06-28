@@ -46,4 +46,4 @@ Apply tooling-db.sql script to your database using this command <br>
 `mysql -h <databse-private-ip> -u <db-username> -p <database-name> < tooling-db.sql`<br>
 
 
-Open the website in your browser http://<Public-IP-Address>/index.php and make sure you can login into the website with "admin" user.
+Open the website in your browser http://Public-IP-Address/index.php and make sure you can login into the website with "admin" user.
