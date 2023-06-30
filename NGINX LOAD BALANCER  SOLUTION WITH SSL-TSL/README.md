@@ -73,7 +73,7 @@ You might have noticed, that every time you restart or stop/start your EC2 insta
 
 - Assign an Elastic IP to your Nginx LB server and associate your domain name with this Elastic IP<br>
 
-![3_elastic_Ip_associated](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/14bc3902-1129-4c5f-9bac-acbca154869a)
+![2A](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/3215c7ee-e695-4d6b-ab5d-ef2cdb554fdd)
 
 - Create a Hosted zone for your domain name on AWS Route 53<br>
 
