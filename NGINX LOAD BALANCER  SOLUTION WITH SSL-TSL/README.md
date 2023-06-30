@@ -1,4 +1,4 @@
-# LOAD BALANCER SOLUTION WITH NGINX AND SSL/TLS <br>
+# NGINX LOAD BALANCER SOLUTION WITH SSL/TLS <br>
 
 It is extremely important to ensure that connections to your Web solutions are secure and information is encrypted in transit – we will also cover connection over secured HTTP (HTTPS protocol), its purpose and what is required to implement it.<br>
 When data is moving between a client (browser) and a Web Server over the Internet – it passes through multiple network devices and, if the data is not encrypted, it can be relatively easy intercepted by someone who has access to the intermediate equipment.<br>
