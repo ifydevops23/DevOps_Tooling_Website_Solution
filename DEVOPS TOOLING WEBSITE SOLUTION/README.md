@@ -271,7 +271,7 @@ INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, 
 ```
 ![3_create_myuser](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/c083d0a9-3299-40bc-93fc-18e145fdaa7b)
 
-- Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with "admin" user. <br>
+- Open the website in your browser http://Web-Server-Public-IP-Address-or-Public-DNS-Name/index.php and make sure you can login into the website with "admin" user. <br>
 ![4_devops_login](https://github.com/ifydevops23/DevOps_Tooling_Website_Solution/assets/126971054/e2494e1d-5b51-46ae-9439-1e9a8b5451ab)
 
 Use Credentials for myuser to login<br>
